@@ -21,4 +21,9 @@ public class MainController {
         //model.put("some", "hello, letsCode!");
         return "index";
     }
+
+    @GetMapping("/signin")
+    public String signIn(Map<String, Object> model){
+        return "signin";
+    }
 }
