@@ -23,7 +23,12 @@ public class MainController {
     }
 
     @GetMapping("/signin")
-    public String signIn(Map<String, Object> model){
+    public String signIn(Map<String, Object> model) {
         return "signin";
+    }
+
+    @GetMapping("signup")
+    public String signUp(Map<String, Object> model) {
+        return "signup";
     }
 }
