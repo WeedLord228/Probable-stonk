@@ -61,7 +61,7 @@ a:focus {
 
 a:hover {
 	text-decoration: none;
-  color: #ffff;
+  color: #ffffff;
 }
 
 /*---------------------------------------------*/
@@ -156,7 +156,6 @@ iframe {
   font-size: 15px;
   color: #1c2d37;
   line-height: 1.4;
-  text-transform: uppercase;
 }
 
 

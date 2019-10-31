@@ -4,8 +4,13 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "usr")
+//@Table(name = "usr")
 public class User {
+
+    public User() {
+
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
