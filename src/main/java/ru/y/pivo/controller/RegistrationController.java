@@ -13,13 +13,13 @@ public class RegistrationController {
     @Autowired
     private UserRepo userRepo;
 
-    @GetMapping("/registration")
+    @GetMapping("/signup")
     public String registration()
     {
-        return "registration";
+        return "signup";
     }
 
-    @GetMapping("/registration")
+    @GetMapping("/signup")
     public String addUser(User user, Map<String,Object> model)
     {
         User userFromDb = userRepo.findByUsername(user.getUsername());
@@ -27,13 +27,13 @@ public class RegistrationController {
         if (userFromDb != null)
         {
             model.put("message","Пользователь уже существует!");
-            return "registration";
+            return "signup";
         }
 
         user.setActive(true);
 
 
-        return "redirect:/login";
+        return "redirect:/signin";
     }
 
 }
