@@ -19,21 +19,21 @@ public class RegistrationController {
         return "signup";
     }
 
-    @GetMapping("/signup")
-    public String addUser(User user, Map<String,Object> model)
-    {
-        User userFromDb = userRepo.findByUsername(user.getUsername());
-
-        if (userFromDb != null)
-        {
-            model.put("message","Пользователь уже существует!");
-            return "signup";
-        }
-
-        user.setActive(true);
-
-
-        return "redirect:/signin";
-    }
+//    @GetMapping("/signup")
+//    public String addUser(User user, Map<String,Object> model)
+//    {
+//        User userFromDb = userRepo.findByUsername(user.getUsername());
+//
+//        if (userFromDb != null)
+//        {
+//            model.put("message","Пользователь уже существует!");
+//            return "signup";
+//        }
+//
+//        user.setActive(true);
+//
+//
+//        return "redirect:/signin";
+//    }
 
 }

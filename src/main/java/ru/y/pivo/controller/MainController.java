@@ -24,8 +24,8 @@ public class MainController {
         return "index";
     }
 
-    @GetMapping("/signup")
-    public String signUp(Map<String, Object> model) {
-        return "signup";
-    }
+//    @GetMapping("/signup")
+//    public String signUp(Map<String, Object> model) {
+//        return "signup";
+//    }
 }
