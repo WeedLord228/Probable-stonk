@@ -46,11 +46,19 @@ public class MainController {
             model.put("message", "User exists!");
             return "registration";
         }
-
         user.setActive(true);
         user.setRoles(Collections.singleton(Role.USER));
         userRepo.save(user);
-
         return "redirect:/login";
     }
+
+//      TODO:
+//    this can show username on main page
+//    @GetMapping("/information")
+//    public String information() {return "information";}
+//
+//    @PostMapping("/information")
+//    public String getInfo(){
+//        return
+//    }
 }
