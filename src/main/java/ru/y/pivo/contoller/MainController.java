@@ -1,6 +1,7 @@
 package ru.y.pivo.contoller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,13 +15,14 @@ import java.util.Map;
 @Controller
 public class MainController {
 
-    @GetMapping
+    @GetMapping("/")
     public String main(Map<String, Object> model) {
-        return "index";
+            return "home";
     }
 
     @GetMapping("/index")
     public String index(Map<String, Object> model) {
+        model.put("username",SecurityContextHolder.getContext().getAuthentication().getName());
         return "index";
     }
     @GetMapping("/maps")
