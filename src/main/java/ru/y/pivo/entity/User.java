@@ -1,4 +1,4 @@
-package ru.y.pivo;
+package ru.y.pivo.entity;
 
 import javax.persistence.*;
 import java.util.Set;

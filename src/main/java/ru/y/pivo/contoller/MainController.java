@@ -1,14 +1,14 @@
-package ru.y.pivo;
+package ru.y.pivo.contoller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import ru.y.pivo.entity.Role;
+import ru.y.pivo.entity.User;
+import ru.y.pivo.repos.UserRepo;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 
 @Controller
