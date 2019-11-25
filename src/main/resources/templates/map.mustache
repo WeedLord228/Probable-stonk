@@ -1,0 +1,27 @@
+<!doctype html>
+<div>Формат ввода адреса: "Город, Улица, номер дома"</div>
+<div>
+    <form method="post">
+        <input type="text" name="address" placeholder="Введите адрес магазина." />
+        <input type="text" name="name" placeholder="Введите название товара.">
+        <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
+        <button type="submit">Добавить товар.</button>
+    </form>
+    <strong>{{response}}</strong>
+</div>
+
+<div>Список Товаров</div>
+<form method="post" action="filterName">
+    <input type="text" name="name">
+    <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
+    <button type="submit">Найти</button>
+</form>
+
+{{#products}}
+    <div>
+        <strong>{{name}}</strong>
+        <strong>{{address}}</strong>
+    </div>
+{{/products}}
+</body>
+</html>

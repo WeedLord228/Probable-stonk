@@ -11,8 +11,6 @@ public class Store {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    private String name;
-
     private String address;
 
     private Integer rate;
@@ -20,8 +18,7 @@ public class Store {
     public Store() {
     }
 
-    public Store(String name, String address, Integer rate) {
-        this.name = name;
+    public Store(String address, Integer rate) {
         this.address = address;
         this.rate = rate;
     }
@@ -32,14 +29,6 @@ public class Store {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getAddress() {

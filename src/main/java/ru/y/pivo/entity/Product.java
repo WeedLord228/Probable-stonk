@@ -17,8 +17,7 @@ public class Product {
     public Product() {
     }
 
-    public Product(Integer id, Store store_id, String name) {
-        this.id = id;
+    public Product(Store store_id, String name) {
         this.store_id = store_id;
         this.name = name;
     }
