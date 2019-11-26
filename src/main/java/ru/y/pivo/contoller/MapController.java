@@ -1,15 +1,21 @@
 package ru.y.pivo.contoller;
 
+import com.maxmind.geoip2.exception.GeoIp2Exception;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import ru.y.pivo.GeoIP;
+import ru.y.pivo.LocationService;
 import ru.y.pivo.entity.Product;
 import ru.y.pivo.entity.Store;
 import ru.y.pivo.repos.ProductRepo;
 import ru.y.pivo.repos.StoreRepo;
 
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.Map;
 
 @Controller
@@ -18,12 +24,20 @@ public class MapController {
     private ProductRepo ProductRepo;
     @Autowired
     private StoreRepo StoreRepo;
+    @Autowired
+    private HttpServletRequest request;
 
     @GetMapping("/map")
-    public String map(Map<String,Object> model)
-    {
-        model.put("response","");
-        model.put("products",null);
+    public String map(Map<String, Object> model) throws IOException, GeoIp2Exception {
+        String ip = request.getRemoteAddr();
+        System.out.println(ip);
+        if (!ip.equals("127.0.0.1")) {
+            LocationService locationService = new LocationService();
+            GeoIP geoIP = locationService.getLocation(ip);
+            model.put("GeoIP", geoIP);
+        }
+        model.put("response", "");
+        model.put("products", null);
         return "map";
     }
 
@@ -83,7 +97,7 @@ public class MapController {
         } else
             response = "Кто то уже позаботился об этом благородном товаре в этом магазине!";
 
-        model.put("products",null);
+        model.put("products", null);
         model.put("response", response);
 
         return "map";

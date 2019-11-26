@@ -1,7 +1,14 @@
 <!doctype html>
 <div>Формат ввода адреса: "Город, Улица, номер дома"</div>
 <div>
-    <form method="post">
+
+    {{#GeoIP}}
+    <div>
+        <strong>{{ipAddress}}</strong>
+        <strong>{{city}}</strong>
+    </div>
+    {{/GeoIP}}
+    <form method="post" action="/add">
         <input type="text" name="address" placeholder="Введите адрес магазина." />
         <input type="text" name="name" placeholder="Введите название товара.">
         <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
