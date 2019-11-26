@@ -9,8 +9,8 @@ public class Product {
     private Integer id;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="store_id")
-    private Store store_id;
+    @JoinColumn(name="store")
+    private Store store;
 
     private String name;
 
@@ -18,7 +18,7 @@ public class Product {
     }
 
     public Product(Store store_id, String name) {
-        this.store_id = store_id;
+        this.store= store_id;
         this.name = name;
     }
 
@@ -31,11 +31,11 @@ public class Product {
     }
 
     public Store getStore_id() {
-        return store_id;
+        return store;
     }
 
     public void setStore_id(Store store_id) {
-        this.store_id = store_id;
+        this.store = store_id;
     }
 
     public String getName() {

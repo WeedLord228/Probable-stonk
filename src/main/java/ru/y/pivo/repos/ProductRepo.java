@@ -12,6 +12,5 @@ import java.util.List;
 public interface ProductRepo extends JpaRepository<Product,Integer> {
     List<Product> findByName(String name);
 
-    @Query(value="from Store s inner join fetch s.address where s.id = store_id", nativeQuery=true)
-    Product findByNameAndAddress(String name,String address);
+    Product findByStoreAndName(Store id, String name);
 }

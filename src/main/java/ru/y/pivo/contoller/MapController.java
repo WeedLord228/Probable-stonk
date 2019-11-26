@@ -16,6 +16,9 @@ import ru.y.pivo.repos.StoreRepo;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -40,8 +43,7 @@ public class MapController {
         model.put("products", null);
         return "map";
     }
-
-    @PostMapping("/filterName")
+    @PostMapping("filter")
     public String nameFilter(
             @RequestParam String name,
             Map<String, Object> model
@@ -53,28 +55,22 @@ public class MapController {
         else
             return "map";
 
-        model.put("products", products);
+        ArrayList<Store> stores = new ArrayList<>();
 
-        model.put("response", "");
+        for (Product p : products){
+            stores.add(p.getStore_id());
+        }
+
+        model.put("name", ((List<Product>) products).get(0).getName());
+
+        model.put("stores", stores);
+
+        model.put("response", "Данный товар отметили в таких магазинах:");
 
         return "map";
     }
 
-//    @PostMapping("/map")
-//    public  String add(
-//            @RequestParam String name,
-//            @RequestParam String address,
-//            Map<String, Object> model
-//    )
-//    {
-//        Store store = new Store(address,0);
-//
-//        Product product = new Product(store,name);
-//
-//        return "map";
-//    }
-
-    @PostMapping("/map")
+    @PostMapping("add")
     public String add(
             @RequestParam String name,
             @RequestParam String address,
@@ -88,7 +84,7 @@ public class MapController {
             StoreRepo.save(store);
         }
 
-        Product product = ProductRepo.findByNameAndAddress(name, address);
+        Product product = ProductRepo.findByStoreAndName(store,name);
 
         if (product == null) {
             product = new Product(store, name);
@@ -96,8 +92,8 @@ public class MapController {
             response = "Ваш товар был успешно добавлен";
         } else
             response = "Кто то уже позаботился об этом благородном товаре в этом магазине!";
-
-        model.put("products", null);
+        model.put("name",null);
+        model.put("store", null);
         model.put("response", response);
 
         return "map";
