@@ -2,12 +2,6 @@
 <div>Формат ввода адреса: "Город, Улица, номер дома"</div>
 <div>
 
-    {{#GeoIP}}
-    <div>
-        <strong>{{ipAddress}}</strong>
-        <strong>{{city}}</strong>
-    </div>
-    {{/GeoIP}}
     <form method="post" action="add">
         <input type="text" name="address" placeholder="Введите адрес магазина."/>
         <input type="text" name="name" placeholder="Введите название товара.">

@@ -34,15 +34,17 @@ public class MapController {
     public String map(Map<String, Object> model) throws IOException, GeoIp2Exception {
         String ip = request.getRemoteAddr();
         System.out.println(ip);
-        if (!ip.equals("127.0.0.1")) {
+        if (!ip.equals("127.0.0.1") && !ip.equals("0:0:0:0:0:0:0:1")) {
             LocationService locationService = new LocationService();
             GeoIP geoIP = locationService.getLocation(ip);
             model.put("GeoIP", geoIP);
         }
+        model.put("name","");
         model.put("response", "");
         model.put("products", null);
         return "map";
     }
+
     @PostMapping("filter")
     public String nameFilter(
             @RequestParam String name,
@@ -57,7 +59,7 @@ public class MapController {
 
         ArrayList<Store> stores = new ArrayList<>();
 
-        for (Product p : products){
+        for (Product p : products) {
             stores.add(p.getStore_id());
         }
 
@@ -84,7 +86,7 @@ public class MapController {
             StoreRepo.save(store);
         }
 
-        Product product = ProductRepo.findByStoreAndName(store,name);
+        Product product = ProductRepo.findByStoreAndName(store, name);
 
         if (product == null) {
             product = new Product(store, name);
@@ -92,8 +94,8 @@ public class MapController {
             response = "Ваш товар был успешно добавлен";
         } else
             response = "Кто то уже позаботился об этом благородном товаре в этом магазине!";
-        model.put("name",null);
-        model.put("store", null);
+        model.put("name", "");
+        model.put("store", "");
         model.put("response", response);
 
         return "map";
