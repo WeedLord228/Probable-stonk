@@ -6,6 +6,7 @@ import com.maxmind.geoip2.model.CityResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 
@@ -13,19 +14,24 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.InetAddress;
+import java.nio.file.Files;
 
 public class LocationService {
 
     private DatabaseReader dbReader;
 
+
     public LocationService() throws IOException {
-        Resource db = new ClassPathResource("GeoLite2-City.mmdb");
+        //Resource db = new ClassPathResource("GeoLite2-City.mmdb");
+        File db = new File("base.mmdb");
 
-        InputStream input = db.getInputStream();
+        if(!db.exists()){
+            try (final InputStream stream =  Application.class.getResourceAsStream(System.lineSeparator() + "GeoLite2-City.mmdb")){
+                Files.copy(stream, db.toPath());
+            }
+        }
 
-        File dbFile = db.getFile();
-
-        dbReader = new DatabaseReader.Builder(dbFile).build();
+        dbReader = new DatabaseReader.Builder(db).build();
     }
 
     public GeoIP getLocation(String ip)
