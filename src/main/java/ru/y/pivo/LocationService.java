@@ -3,6 +3,8 @@ package ru.y.pivo;
 import com.maxmind.geoip2.DatabaseReader;
 import com.maxmind.geoip2.exception.GeoIp2Exception;
 import com.maxmind.geoip2.model.CityResponse;
+import org.apache.tomcat.util.http.fileupload.FileUtils;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
@@ -11,6 +13,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.InetAddress;
@@ -22,16 +25,12 @@ public class LocationService {
 
 
     public LocationService() throws IOException {
-        //Resource db = new ClassPathResource("GeoLite2-City.mmdb");
-        File db = new File("base.mmdb");
-
-        if(!db.exists()){
-            try (final InputStream stream =  Application.class.getResourceAsStream(System.lineSeparator() + "GeoLite2-City.mmdb")){
-                Files.copy(stream, db.toPath());
-            }
+        InputStream in = new ClassPathResource("GeoLite2-City.mmdb").getInputStream();
+        File tempFile = File.createTempFile("temp.mmdb", "");
+        try(FileOutputStream out = new FileOutputStream(tempFile)){
+            IOUtils.copy(in, out);
         }
-
-        dbReader = new DatabaseReader.Builder(db).build();
+        dbReader = new DatabaseReader.Builder(tempFile).build();
     }
 
     public GeoIP getLocation(String ip)
