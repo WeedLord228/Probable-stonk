@@ -8,12 +8,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.y.pivo.GeoIP;
 import ru.y.pivo.LocationService;
+import ru.y.pivo.maps.JSONInfo;
+import ru.y.pivo.maps.Pair;
 import ru.y.pivo.entity.Product;
 import ru.y.pivo.entity.Store;
 import ru.y.pivo.repos.ProductRepo;
 import ru.y.pivo.repos.StoreRepo;
 
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
@@ -42,15 +43,16 @@ public class MapController {
         model.put("name","");
         model.put("response", "");
         model.put("products", null);
+        model.put("firstCoordinate", "");
+        model.put("secondCoordinate", "");
+        model.put("address","");
         return "map";
     }
 
     @PostMapping("filter")
-    public String nameFilter(
-            @RequestParam String name,
-            Map<String, Object> model
-    ) {
+    public String nameFilter(@RequestParam String name, Map<String, Object> model) throws Exception {
         Iterable<Product> products;
+        JSONInfo info = new JSONInfo();
 
         if (name != null && !name.isEmpty())
             products = ProductRepo.findByName(name);
@@ -58,26 +60,27 @@ public class MapController {
             return "map";
 
         ArrayList<Store> stores = new ArrayList<>();
+        ArrayList<Pair> coordinates = new ArrayList<>();
 
         for (Product p : products) {
             stores.add(p.getStore_id());
         }
+        for(Store s: stores){
+            Double [] coordiates = info.getCoordinates(s.getAddress());
+            coordinates.add(new Pair(coordiates[1] , coordiates[0]));
+        }
+
 
         model.put("name", ((List<Product>) products).get(0).getName());
-
         model.put("stores", stores);
-
         model.put("response", "Данный товар отметили в таких магазинах:");
-
+        model.put("coordinates",coordinates);
         return "map";
     }
 
     @PostMapping("add")
-    public String add(
-            @RequestParam String name,
-            @RequestParam String address,
-            Map<String, Object> model
-    ) {
+    public String add(@RequestParam String name, @RequestParam String address, Map<String, Object> model) throws Exception {
+
         String response;
         Store store = StoreRepo.findByAddress(address);
 
