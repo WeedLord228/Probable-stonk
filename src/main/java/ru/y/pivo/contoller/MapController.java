@@ -6,8 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import ru.y.pivo.GeoIP;
-import ru.y.pivo.LocationService;
+import ru.y.pivo.LocationService.GeoIP;
+import ru.y.pivo.LocationService.LocationService;
 import ru.y.pivo.maps.JSONInfo;
 import ru.y.pivo.maps.Pair;
 import ru.y.pivo.entity.Product;
@@ -35,11 +35,13 @@ public class MapController {
     public String map(Map<String, Object> model) throws IOException, GeoIp2Exception {
         String ip = request.getRemoteAddr();
         System.out.println(ip);
+        
         if (!ip.equals("127.0.0.1") && !ip.equals("0:0:0:0:0:0:0:1")) {
             LocationService locationService = new LocationService();
             GeoIP geoIP = locationService.getLocation(ip);
             model.put("GeoIP", geoIP);
         }
+
         model.put("name","");
         model.put("response", "");
         model.put("products", null);

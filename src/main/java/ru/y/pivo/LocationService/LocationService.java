@@ -1,13 +1,10 @@
-package ru.y.pivo;
+package ru.y.pivo.LocationService;
 
 import com.maxmind.geoip2.DatabaseReader;
 import com.maxmind.geoip2.exception.GeoIp2Exception;
 import com.maxmind.geoip2.model.CityResponse;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,8 +17,6 @@ public class LocationService {
 
     public LocationService() throws IOException {
         Resource db = new ClassPathResource("GeoLite2-City.mmdb");
-
-        InputStream input = db.getInputStream();
 
         File dbFile = db.getFile();
 

@@ -1,4 +1,4 @@
-package ru.y.pivo;
+package ru.y.pivo.LocationService;
 
 public class GeoIP {
     private String ipAddress;
