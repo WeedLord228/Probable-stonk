@@ -34,20 +34,15 @@ public class MapController {
     @GetMapping("/map")
     public String map(Map<String, Object> model) throws IOException, GeoIp2Exception {
         String ip = request.getRemoteAddr();
-        System.out.println(ip);
-        
+        GeoIP geoIP =  new GeoIP("","", 56.83 , 60.61 );
         if (!ip.equals("127.0.0.1") && !ip.equals("0:0:0:0:0:0:0:1")) {
             LocationService locationService = new LocationService();
-            GeoIP geoIP = locationService.getLocation(ip);
-            model.put("GeoIP", geoIP);
+            geoIP = locationService.getLocation(ip);
         }
-
+        model.put("geoIP", geoIP);
         model.put("name","");
         model.put("response", "");
         model.put("products", null);
-        model.put("firstCoordinate", "");
-        model.put("secondCoordinate", "");
-        model.put("address","");
         return "map";
     }
 

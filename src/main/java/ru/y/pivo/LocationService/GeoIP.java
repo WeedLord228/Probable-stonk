@@ -3,21 +3,21 @@ package ru.y.pivo.LocationService;
 public class GeoIP {
     private String ipAddress;
     private String city;
-    private String latitude;
-    private String longitude;
+    private double latitude;
+    private double longitude;
 
-    public GeoIP(String ipAddress, String city, String latitude, String longitude) {
+    public GeoIP(String ipAddress, String city, double latitude, double longitude) {
         this.ipAddress = ipAddress;
         this.city = city;
         this.latitude = latitude;
         this.longitude = longitude;
     }
 
-    public String getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(String latitude) {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
@@ -37,11 +37,11 @@ public class GeoIP {
         this.ipAddress = ipAddress;
     }
 
-    public String getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(String longitude) {
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 }

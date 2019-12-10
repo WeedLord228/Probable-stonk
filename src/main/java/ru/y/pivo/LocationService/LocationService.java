@@ -29,10 +29,10 @@ public class LocationService {
         CityResponse response = dbReader.city(ipAddress);
 
         String cityName = response.getCity().getName();
-        String latitude =
-                response.getLocation().getLatitude().toString();
-        String longitude =
-                response.getLocation().getLongitude().toString();
+        double latitude =
+                response.getLocation().getLatitude();
+        double longitude =
+                response.getLocation().getLongitude();
         return new GeoIP(ip, cityName, latitude, longitude);
     }
 }
