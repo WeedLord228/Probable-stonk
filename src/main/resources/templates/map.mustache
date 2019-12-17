@@ -7,9 +7,7 @@
 
                     DG.then(function () {
                     map = DG.map('map', {
-                    {{#geoIP}}
-                        center: ['{{latitude}}', '{{longitude}}'],
-                    {{/geoIP}}
+                        center: [56.83, 60.61],
                         zoom: 13
                     });
                     var coordinates = [];
@@ -34,7 +32,7 @@
         <input type="text" name="address" placeholder="Введите адрес магазина.">
         <input type="text" name="name" placeholder="Введите название товара.">
         <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
-        <button type="submit">Добавить товар.</button>
+        <button type="submit">Добавить товар.</button><li><a href="/login" class="text">Выйти</a></li>
     </form>
     <strong>{{response}}</strong>
 </div>

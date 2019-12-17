@@ -20,15 +20,23 @@ public class MainController {
             return "home";
     }
 
+    @GetMapping("/login")
+    public String login(Map <String,Object> model){
+        SecurityContextHolder.getContext().getAuthentication().setAuthenticated(false);
+        return "login";
+    }
+
     @GetMapping("/index")
     public String index(Map<String, Object> model) {
         model.put("username",SecurityContextHolder.getContext().getAuthentication().getName());
         return "index";
     }
+
     @GetMapping("/maps")
     public String maps(Map<String, Object> model) {
         return "maps";
     }
+
 
     @Autowired
     private UserRepo userRepo;
