@@ -27,7 +27,7 @@ public class ArticlesController {
     @GetMapping("/article")
     public String getArticle(@RequestParam Integer id,
                              Map<String, Object> model) {
-//        model.put("username", SecurityContextHolder.getContext().getAuthentication().getName());
+        model.put("username1", SecurityContextHolder.getContext().getAuthentication().getName());
         Article article = ArticleRepo.getOne(id);
         model.put("comments",CommentRepo.findByArticle(article));
         model.put("article", article);
