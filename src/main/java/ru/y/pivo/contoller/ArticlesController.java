@@ -29,7 +29,6 @@ public class ArticlesController {
         return "article";
     }
 
-
     @GetMapping("/articles")
     public String main(Map<String, Object> model) {
         model.put("username", SecurityContextHolder.getContext().getAuthentication().getName());
@@ -38,10 +37,10 @@ public class ArticlesController {
         return "articles";
     }
 
-    @GetMapping("/addArticles")
+    @GetMapping("/addArticle")
     public String addMain(Map<String, Object> model) {
         model.put("username", SecurityContextHolder.getContext().getAuthentication().getName());
-        return "addArticles";
+        return "addArticle";
     }
 
     @PostMapping("/addArticle")
@@ -52,13 +51,12 @@ public class ArticlesController {
 
         Article article = ArticleRepo.findByName(header);
 
-
         if (article == null) {
             User user = UserRepo.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
             article = new Article(user, 0, content, header);
             ArticleRepo.save(article);
         }
 
-        return "addArticles";
+        return "articles";
     }
 }

@@ -18,6 +18,7 @@ import javax.sql.DataSource;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
     @Autowired
     private DataSource dataSource;
 
@@ -30,8 +31,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                     .formLogin()
                     .defaultSuccessUrl("/index", true)
-                    //.formLogin()
-                    //.successForwardUrl("/index")
                     .loginPage("/login")
                     .permitAll()
                 .and()
