@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<title>О себе</title>
+</head>
+<body>
+<ol>
+    <li value="1">Ваш логин : {{username}}</li>
+    <li>Здесь можно сделать вставку геолокации своей , после выката на хироку</li>
+    <li>Кол-во написанных вами статей : {{articleCount}}</li>
+    <li>Вот и сами статьи</li>
+    {{#articles}}
+        <a href="article?id={{id}}" class="nav-link"> {{name }}</a>
+    {{/articles}}
+</ol>

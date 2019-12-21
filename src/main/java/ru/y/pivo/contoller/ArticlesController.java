@@ -8,9 +8,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.y.pivo.entity.Article;
 import ru.y.pivo.entity.User;
-import ru.y.pivo.repos.ArticleRepo;
-import ru.y.pivo.repos.ProductRepo;
-import ru.y.pivo.repos.StoreRepo;
 import ru.y.pivo.repos.UserRepo;
 
 import java.util.ArrayList;
@@ -22,7 +19,6 @@ public class ArticlesController {
     private ru.y.pivo.repos.ArticleRepo ArticleRepo;
     @Autowired
     private UserRepo UserRepo;
-
 
     @GetMapping("/article")
     public String getArticle(@RequestParam Integer id,
