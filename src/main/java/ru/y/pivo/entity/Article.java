@@ -10,7 +10,7 @@ public class Article {
     private Integer id;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="user_id")
+    @JoinColumn(name = "user_id")
     private User author;
 
     private String name;
