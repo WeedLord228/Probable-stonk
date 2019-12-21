@@ -1,8 +1,85 @@
-<html>
-{{#articles}}
-    <a href="article?id={{id}}" class="nav-link"> {{name}} </a>
-    <h1> </h1>
-{{/articles}}
+<!doctype html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Статьи</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- <link rel="manifest" href="site.webmanifest"> -->
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <!-- CSS here -->
+    <link rel="stylesheet" href="css/map_bootstrap.min.css">
+    <link rel="stylesheet" href="css/map_owl.carousel.min.css">
+    <link rel="stylesheet" href="css/map_magnific-popup.css">
+    <link rel="stylesheet" href="css/map_map_font-awesome.min.css">
+    <link rel="stylesheet" href="css/map_map_themify-icons.css">
+    <link rel="stylesheet" href="css/map_nice-select.css">
+    <link rel="stylesheet" href="css/map_flaticon.css">
+    <link rel="stylesheet" href="css/map_animate.css">
+    <link rel="stylesheet" href="css/map_slicknav.css">
+    <link rel="stylesheet" href="css/map_style.css">
+</head>
+<body>
+<header>
+    <div class="header-area ">
+        <div id="sticky-header" class="main-header-area white-bg">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-xl-2 col-lg-2">
+                        <div class="logo-img">
+                            <a href="index.html">
+                                <img src="" alt="">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6">
+                        <div class="main-menu d-none d-lg-block">
+                            <nav>
+                                <ul id="navigation">
+                                    <li><a href="index">На главную</a></li>
+                                    <li><a href="articles">Статьи</a></li>
+                                    <li><a href="map">Карты</a></li>
+                                    <li><a href="experts">Эксперты</a></li>
+                                    <li><a href="information" class="text">{{username}}</a></li>
+                                    <li><a href="/login" class="text">Выйти</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="mobile_menu d-block d-lg-none"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<section class="blog_area section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mb-5 mb-lg-0">
+                <div class="blog_left_sidebar">
+                    {{#articles}}
+                    <article class="blog_item">
+                        <div class="blog_details">
+                            <a class="d-inline-block" href="article?id={{id}}">
+                                <h2>{{name}}</h2>
+                            </a>
+                            <p> Тут будет описание</p>
+                            <ul class="blog-info-link">
+                                <li><a href="#"><i class="fa fa-user"></i>Тут будут теги</a></li>
+                                <li><a href="#"><i class="fa fa-comments"></i> Тут будет кол-во комментов</a></li>
+                            </ul>
+                        </div>
+                    </article>
+                    {{/articles}}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 <h1></h1>
 <a href="addArticles" class="nav-link">Добавить статью</a>
-</html>
+</body>

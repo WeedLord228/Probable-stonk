@@ -22,24 +22,25 @@ public class ArticlesController {
 
     @GetMapping("/article")
     public String getArticle(@RequestParam Integer id,
-                             Map<String, Object> model)
-    {
+                             Map<String, Object> model) {
+        model.put("username", SecurityContextHolder.getContext().getAuthentication().getName());
         Article article = ArticleRepo.getOne(id);
-        model.put("article",article);
+        model.put("article", article);
         return "article";
     }
 
 
     @GetMapping("/articles")
     public String main(Map<String, Object> model) {
+        model.put("username", SecurityContextHolder.getContext().getAuthentication().getName());
         ArrayList<Article> articles = (ArrayList<Article>) ArticleRepo.findAll();
         model.put("articles", articles);
         return "articles";
     }
 
     @GetMapping("/addArticles")
-    public String addMain() {
-
+    public String addMain(Map<String, Object> model) {
+        model.put("username", SecurityContextHolder.getContext().getAuthentication().getName());
         return "addArticles";
     }
 
@@ -47,6 +48,7 @@ public class ArticlesController {
     public String add(@RequestParam String header,
                       @RequestParam String content,
                       Map<String, Object> model) {
+        model.put("username", SecurityContextHolder.getContext().getAuthentication().getName());
 
         Article article = ArticleRepo.findByName(header);
 

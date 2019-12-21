@@ -50,7 +50,7 @@ public class MapController {
 
     @PostMapping("filter")
     public String nameFilter(@RequestParam String name, Map<String, Object> model) throws Exception {
-        model.put("username",SecurityContextHolder.getContext().getAuthentication().getName());
+        model.put("username", SecurityContextHolder.getContext().getAuthentication().getName());
         Iterable<Product> products;
         JSONInfo info = new JSONInfo();
 
