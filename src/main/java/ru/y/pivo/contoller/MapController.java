@@ -2,6 +2,7 @@ package ru.y.pivo.contoller;
 
 import com.maxmind.geoip2.exception.GeoIp2Exception;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,6 +34,7 @@ public class MapController {
 
     @GetMapping("/map")
     public String map(Map<String, Object> model) throws IOException, GeoIp2Exception {
+        model.put("username", SecurityContextHolder.getContext().getAuthentication().getName());
         String ip = request.getRemoteAddr();
         GeoIP geoIP =  new GeoIP("","", 56.83 , 60.61 );
         if (!ip.equals("127.0.0.1") && !ip.equals("0:0:0:0:0:0:0:1")) {
@@ -48,6 +50,7 @@ public class MapController {
 
     @PostMapping("filter")
     public String nameFilter(@RequestParam String name, Map<String, Object> model) throws Exception {
+        model.put("username",SecurityContextHolder.getContext().getAuthentication().getName());
         Iterable<Product> products;
         JSONInfo info = new JSONInfo();
 
@@ -67,8 +70,7 @@ public class MapController {
             coordinates.add(new Pair(coordiates[1] , coordiates[0]));
         }
 
-
-        model.put("name", ((List<Product>) products).get(0).getName());
+        model.put("name","Вы искали: " + ((List<Product>) products).get(0).getName());
         model.put("stores", stores);
         model.put("response", "Данный товар отметили в таких магазинах:");
         model.put("coordinates",coordinates);
@@ -78,6 +80,7 @@ public class MapController {
     @PostMapping("add")
     public String add(@RequestParam String name, @RequestParam String address, Map<String, Object> model) throws Exception {
 
+        model.put("username",SecurityContextHolder.getContext().getAuthentication().getName());
         String response;
         Store store = StoreRepo.findByAddress(address);
 

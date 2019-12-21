@@ -1,6 +1,25 @@
 <!doctype html>
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Карты</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- <link rel="manifest" href="site.webmanifest"> -->
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <!-- CSS here -->
+    <link rel="stylesheet" href="css/map_bootstrap.min.css">
+    <link rel="stylesheet" href="css/map_owl.carousel.min.css">
+    <link rel="stylesheet" href="css/map_magnific-popup.css">
+    <link rel="stylesheet" href="css/map_map_font-awesome.min.css">
+    <link rel="stylesheet" href="css/map_map_themify-icons.css">
+    <link rel="stylesheet" href="css/map_nice-select.css">
+    <link rel="stylesheet" href="css/map_flaticon.css">
+    <link rel="stylesheet" href="css/map_animate.css">
+    <link rel="stylesheet" href="css/map_slicknav.css">
+    <link rel="stylesheet" href="css/map_style.css">
     <script src="https://maps.api.2gis.ru/2.0/loader.js?pkg=full"></script>
     <script type="text/javascript">
                      var map;
@@ -25,37 +44,126 @@
                     });
     </script>
 </head>
-<body style="position: absolute; width:100%;">
-<div>Формат ввода адреса: "Город, Улица, номер дома"</div>
-<div>
-    <form method="post" action="add">
-        <input type="text" name="address" placeholder="Введите адрес магазина.">
-        <input type="text" name="name" placeholder="Введите название товара.">
-        <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
-        <button type="submit">Добавить товар.</button><li><a href="/login" class="text">Выйти</a></li>
-    </form>
-    <strong>{{response}}</strong>
-</div>
-
-<div>Список Товаров</div>
-<form method="post" action="filter">
-    <input type="text" name="name">
-    <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
-    <button type="submit">Найти</button>
-</form>
-
-<div>
-    {{response}}
-</div>
-
-<div>
-    <strong>{{name}}</strong>
-</div>
-{{#stores}}
-    <div>
-        {{address}}
+<body> <!--style="position: absolute; width:100%;-->
+<header>
+    <div class="header-area ">
+        <div id="sticky-header" class="main-header-area white-bg">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-xl-2 col-lg-2">
+                        <div class="logo-img">
+                            <a href="index.html">
+                                <img src="" alt="">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6">
+                        <div class="main-menu d-none d-lg-block">
+                            <nav>
+                                <ul id="navigation">
+                                    <li><a href="index">На главную</a></li>
+                                    <li><a href="articles">Статьи</a></li>
+                                    <li><a href="map">Карты</a></li>
+                                    <li><a href="experts">Эксперты</a></li>
+                                    <li><a href="information" class="text">{{username}}</a></li>
+                                    <li><a href="/login" class="text">Выйти</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="mobile_menu d-block d-lg-none"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-{{/stores}}
-<div id="map" style="width:100%; height:600px;"></div>
+</header>
+<section class="contact-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h2 class="contact-title">Список Товаров</h2>
+                <form method="post" action="filter">
+                    <input class="form-control" type="text" name="name">
+                    <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+                    <div class="form-group mt-3">
+                        <button type="submit" class="button button-contactForm boxed-btn">Найти</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-4">
+                <div>
+                    {{name}}
+                </div>
+                <div>
+                    {{response}}
+                </div>
+                {{#stores}}
+                    <div>
+                        {{address}}
+                    </div>
+                {{/stores}}
+            </div>
+        </div>
+        <div class="d-none d-sm-block mb-5 pb-4">
+            <div id="map" style="width:100%; height:600px;"></div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <h2 class="contact-title">Внесите свой вклад</h2>
+            </div>
+            <div class="col-md-8" style="padding-bottom:10px;">Формат ввода адреса: "Город, Улица, номер дома"</div>
+
+            <div class="col-lg-8">
+                <form class="form-contact contact_form" method="post" action="add" id="contactForm">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <input class="form-control valid" name="address" id="address" type="text"
+                                       onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your name'"
+                                       placeholder="Введите адрес">
+                                <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <input class="form-control valid" name="name" id="name"
+                                       onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'"
+                                       placeholder="Введите название">
+                                <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group mt-3">
+                        <button type="submit" class="button button-contactForm boxed-btn">Добавить</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-lg-3 offset-lg-1">
+                <div class="media contact-info">
+                    <div class="media-body">
+                        <h3>Город, улица, номер дома</h3>
+                        <p>Пожалуйста, соблюдайте формат</p>
+                    </div>
+                </div>
+                <div class="media contact-info">
+                    <div class="media-body">
+                        <h3>Не вводите заведомо ложную информацию</h3>
+                        <p>Скоро будут баны</p>
+                    </div>
+                </div>
+                <div class="media contact-info">
+                    <div class="media-body">
+                        <h3>Добавляйте товары, соответствующие тематике сайта</h3>
+                        <p>Информацию о том, где купить лыжи можно найти <a
+                                href="https://www.market.yandex.ru">здесь</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 </body>
 </html>

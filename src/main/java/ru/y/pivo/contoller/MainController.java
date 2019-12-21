@@ -34,6 +34,7 @@ public class MainController {
 
     @GetMapping("/maps")
     public String maps(Map<String, Object> model) {
+        model.put("username",SecurityContextHolder.getContext().getAuthentication().getName());
         return "maps";
     }
 
