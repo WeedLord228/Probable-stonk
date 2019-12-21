@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.y.pivo.entity.Article;
+import ru.y.pivo.entity.Comment;
 import ru.y.pivo.entity.User;
+import ru.y.pivo.repos.CommentRepo;
 import ru.y.pivo.repos.UserRepo;
 
 import java.util.ArrayList;
@@ -19,12 +21,15 @@ public class ArticlesController {
     private ru.y.pivo.repos.ArticleRepo ArticleRepo;
     @Autowired
     private UserRepo UserRepo;
+    @Autowired
+    private CommentRepo CommentRepo;
 
     @GetMapping("/article")
     public String getArticle(@RequestParam Integer id,
                              Map<String, Object> model) {
-        model.put("username", SecurityContextHolder.getContext().getAuthentication().getName());
+//        model.put("username", SecurityContextHolder.getContext().getAuthentication().getName());
         Article article = ArticleRepo.getOne(id);
+        model.put("comments",CommentRepo.findByArticle(article));
         model.put("article", article);
         return "article";
     }
@@ -42,6 +47,20 @@ public class ArticlesController {
         model.put("username", SecurityContextHolder.getContext().getAuthentication().getName());
         return "addArticle";
     }
+
+    @PostMapping("/addComment")
+    public String addComment(@RequestParam Integer id,
+                             @RequestParam String content,
+                             Map<String, Object> model) {
+        User user = UserRepo.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        Article article = ArticleRepo.getOne(id);
+
+        Comment comment = new Comment(user,article,content);
+        CommentRepo.save(comment);
+        model.put("comments",CommentRepo.findAll());
+        return "redirect:article?id="+id;
+    }
+
 
     @PostMapping("/addArticle")
     public String add(@RequestParam String header,

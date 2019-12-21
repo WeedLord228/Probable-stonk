@@ -1,7 +1,23 @@
 <html>
 {{#article}}
     <strong>{{name}}</strong>
-    <h1> </h1>
+    <h1></h1>
     <a> {{content}} </a>
+
+    <a>Комментарии:</a>
+    <form method="post" action="addComment?id={{id}}">
+    <textarea rows="5" cols="30" name="content" placeholder="Оставьте комментарий."></textarea>
+    <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+    <button type="submit">Оставить комментарий.</button>
+    </form>
 {{/article}}
+
+{{#comments}}
+    {{#author}}
+        <strong>{{username}} </strong>
+    {{/author}}
+    :   {{commentCntent}}
+    <h1></h1>
+{{/comments}}
+
 </html>
