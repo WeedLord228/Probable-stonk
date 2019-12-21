@@ -63,24 +63,56 @@
             <div class="col-lg-8 mb-5 mb-lg-0">
                 <div class="blog_left_sidebar">
                     {{#articles}}
-                    <article class="blog_item">
-                        <div class="blog_details">
-                            <a class="d-inline-block" href="article?id={{id}}">
+                        <article class="blog_item">
+                            <div class="blog_details">
+                                <a class="d-inline-block" href="article?id={{id}}">
                                 <h2>{{name}}</h2>
-                            </a>
-                            <p> Тут будет описание</p>
-                            <ul class="blog-info-link">
-                                <li><a href="#"><i class="fa fa-user"></i>Тут будут теги</a></li>
-                                <li><a href="#"><i class="fa fa-comments"></i> Тут будет кол-во комментов</a></li>
-                            </ul>
-                        </div>
-                    </article>
+                                </a>
+                                <p> Тут будет описание</p>
+                                <ul class="blog-info-link">
+                                    <li><a href="#"><i class="fa fa-user"></i>Тут будут теги</a></li>
+                                    <li><a href="#"><i class="fa fa-comments"></i> Тут будет кол-во комментов</a></li>
+                                </ul>
+                            </div>
+                        </article>
                     {{/articles}}
                 </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="blog_right_sidebar">
+                    <aside class="single_sidebar_widget search_widget">
+                        <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
+                                type="submit" onclick="window.location.href = 'addArticle';">Добавить статью
+                        </button>
+                    </aside>
+                    <aside class="single_sidebar_widget tag_cloud_widget">
+                        <h4 class="widget_title">Популярные теги</h4>
+                        <ul class="list">
+                            <li>
+                                <a href="#">Тут</a>
+                            </li>
+                            <li>
+                                <a href="#">вывести</a>
+                            </li>
+                            <li>
+                                <a href="#">самые</a>
+                            </li>
+                            <li>
+                                <a href="#">популярные</a>
+                            </li>
+                            <li>
+                                <a href="#">теги</a>
+                            </li>
+                            <li>
+                                <a href="#">(просто сделай класс где вычисляются топ 5 тегов по популярности и запихни
+                                    массивом строк)</a>
+                            </li>
+                        </ul>
+                    </aside>
+                </div>
+
             </div>
         </div>
     </div>
 </section>
-<h1></h1>
-<a href="addArticle" class="nav-link">Добавить статью</a>
 </body>
