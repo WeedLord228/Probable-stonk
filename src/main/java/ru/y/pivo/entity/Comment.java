@@ -16,16 +16,15 @@ public class Comment {
     @JoinColumn(name="article")
     private Article article;
 
-    private String content;
+    private String commentCntent;
 
     public Comment() {
     }
 
-    public Comment(Integer id, User author, Article article, String content) {
-        this.id = id;
+    public Comment(User author, Article article, String content) {
         this.author = author;
         this.article = article;
-        this.content = content;
+        this.commentCntent = content;
     }
 
     public Integer getId() {
@@ -53,10 +52,10 @@ public class Comment {
     }
 
     public String getContent() {
-        return content;
+        return commentCntent;
     }
 
     public void setContent(String content) {
-        this.content = content;
+        this.commentCntent = content;
     }
 }

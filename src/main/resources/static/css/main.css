@@ -58,7 +58,7 @@ a:focus {
 
 a:hover {
 	text-decoration: none;
-  color: #dc8100;
+  color: #f8b117;
 }
 
 /*---------------------------------------------*/
@@ -251,7 +251,7 @@ iframe {
   top: -1px;
   left: -1px;
   pointer-events: none;
-  border: 1px solid #dc8100;
+  border: 1px solid #f8b117;
   border-radius: 3px;
 
   visibility: hidden;
@@ -315,11 +315,11 @@ iframe {
 }
 
 .btn-show-pass:hover {
-  color: #dc8100;
+  color: #f8b117;
 }
 
 .btn-show-pass.active {
-  color: #dc8100;
+  color: #f8b117;
 }
 
 /*==================================================================
@@ -370,7 +370,7 @@ iframe {
 }
 
 .input-checkbox100:checked + .label-checkbox100::before {
-  color: #dc8100;
+  color: #f8b117;
 }
 
 
@@ -412,7 +412,7 @@ iframe {
 }
 
 .login100-form-btn:hover {
-  background-color: #dc8100;
+  background-color: #f8b117;
 }
 
 
