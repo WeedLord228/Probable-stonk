@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <title>О себе</title>
+    <meta charset="UTF-8">
+    <title>Imgur-Upload</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./css/style.css" rel="stylesheet" media="screen">
+    <link href="./css/mobile-style.css" rel="stylesheet" media="screen">
+    <link rel="shortcut icon" href="./favicon.png">
+</head>
+<body>
+<div class="title">
+    <h1>Выберите фото профиля</h1>
+</div>
+<div class="dropzone">
+    <div class="info"></div>
+</div>
+<script type="text/javascript" src="./js/imgur.js"></script>
+<script type="text/javascript">
+    var feedback = function(res) {
+    if (res.success === true) {
+        var get_link = res.data.link.replace(/^http:\/\//i, 'https://');
+        document.querySelector('.status').classList.add('bg-success');
+        document.querySelector('.status').innerHTML =
+            '<img width = "200" height = "160" class="img" alt="Imgur-Upload" src=\"' + get_link + '\"/>' +
+            '<form method="post" action="addPhoto">' +
+                '<textarea rows="0" cols="0" name="url" style="display:none;">\"' + get_link + '\"</textarea>'+
+                '<input type="hidden" name="_csrf" value="{{_csrf.token}}"/>'+
+                '<button type="submit">Загрузить</button>'+
+            '</form>';
+    }
+};
+
+new Imgur({
+    clientid: '4409588f10776f7', //You can change this ClientID
+    callback: feedback
+});
+</script>
+</body>

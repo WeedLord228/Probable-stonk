@@ -2,8 +2,22 @@
 <html lang="ru">
 <head>
 <title>О себе</title>
+    <meta charset="UTF-8">
+    <title>Imgur-Upload</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./css/style.css" rel="stylesheet" media="screen">
+    <link href="./css/mobile-style.css" rel="stylesheet" media="screen">
+    <link rel="shortcut icon" href="./favicon.png">
 </head>
 <body>
+<div class="title">
+    <h1>Ваш профиль</h1>
+    {{#picture}}
+        <img width = "200" height = "160" class="img" alt="Imgur-Upload" src="{{url}}"/>
+    {{/picture}}
+    <h1> </h1>
+    <a href="addPhoto" class="nav-link">Выбрать аватарку</a>
+</div>
 <ol>
     <li value="1">Ваш логин : {{username}}</li>
     <li>Здесь можно сделать вставку геолокации своей , после выката на хироку</li>
@@ -12,4 +26,13 @@
     {{#articles}}
         <a href="article?id={{id}}" class="nav-link"> {{name }}</a>
     {{/articles}}
+    <li>Тест</li>
+    {{#info}}
+    <a>Информация о вас : {{content}}</a>
+    {{/info}}
+    <form method="post" action="information">
+        <textarea rows="10" cols="40" name="content" placeholder="Напишите о себе"></textarea>
+        <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+        <button type="submit">Изменить</button>
+    </form>
 </ol>

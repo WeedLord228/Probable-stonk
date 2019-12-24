@@ -5,10 +5,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import ru.y.pivo.entity.Article;
+import ru.y.pivo.entity.Info;
 import ru.y.pivo.entity.Role;
 import ru.y.pivo.entity.User;
 import ru.y.pivo.repos.ArticleRepo;
+import ru.y.pivo.repos.InfoRepo;
 import ru.y.pivo.repos.UserRepo;
 
 import java.util.ArrayList;
@@ -17,6 +20,12 @@ import java.util.Map;
 
 @Controller
 public class MainController {
+    @Autowired
+    private ru.y.pivo.repos.InfoRepo InfoRepo;
+    @Autowired
+    private ru.y.pivo.repos.ArticleRepo ArticleRepo;
+    @Autowired
+    private UserRepo userRepo;
 
     @GetMapping("/")
     public String main(Map<String, Object> model) {
@@ -40,22 +49,6 @@ public class MainController {
         model.put("username",SecurityContextHolder.getContext().getAuthentication().getName());
         return "maps";
     }
-
-    @Autowired
-    private ru.y.pivo.repos.ArticleRepo ArticleRepo;
-
-    @GetMapping("/information")
-    public String information(Map<String, Object> model){
-        ArrayList<Article> articles = (ArrayList<Article>) ArticleRepo.findAll();
-        model.put("username",SecurityContextHolder.getContext().getAuthentication().getName());
-        model.put("articleCount" , articles.size()-1);
-        model.put("articles",articles);
-
-        return "information";
-    }
-
-    @Autowired
-    private UserRepo userRepo;
 
     @GetMapping("/registration")
     public String registration() {
