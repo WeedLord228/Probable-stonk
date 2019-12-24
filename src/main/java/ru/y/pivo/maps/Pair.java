@@ -1,27 +1,28 @@
 package ru.y.pivo.maps;
 
-public class Pair {
-    private double x;
-    private double y;
+public class Pair<T extends Object,
+        S extends Object> {
+    private T x;
+    private S y;
 
-    public Pair(double x, double y) {
+    public Pair(T x, S y) {
         this.x = x;
         this.y = y;
     }
 
-    public double getX() {
+    public T getX() {
         return x;
     }
 
-    public void setX(double x) {
+    public void setX(T x) {
         this.x = x;
     }
 
-    public double getY() {
+    public S getY() {
         return y;
     }
 
-    public void setY(double y) {
+    public void setY(S y) {
         this.y = y;
     }
 }

@@ -1,11 +1,13 @@
 <!doctype html>
 <body>
 <div>
+    {{response}}
     <form method="post" action="addArticle">
         <input type="text" name="header" placeholder="Введите заголовок статьи"/>
         <!--<input type="text" name="content" placeholder="">-->
         <textarea rows="40" cols="100" name="content" placeholder="Можете начать писать статью"></textarea>
         <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+        <input type="text" name="tags" placeholder="Введите теги статьи через запятую"/>
         <button type="submit">Добавить статью.</button>
     </form>
 </div>

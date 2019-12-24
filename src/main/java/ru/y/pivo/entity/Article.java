@@ -1,6 +1,7 @@
 package ru.y.pivo.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Article {
@@ -51,14 +52,6 @@ public class Article {
 
     public void setAuthor(User author) {
         this.author = author;
-    }
-
-    public Integer getRate() {
-        return rate;
-    }
-
-    public void setRate(Integer rate) {
-        this.rate = rate;
     }
 
     public String getContent() {
