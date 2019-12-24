@@ -32,7 +32,7 @@ public class ArticlesController {
     @GetMapping("/article")
     public String getArticle(@RequestParam Integer id,
                              Map<String, Object> model) {
-//        model.put("username", SecurityContextHolder.getContext().getAuthentication().getName());
+        model.put("username1", SecurityContextHolder.getContext().getAuthentication().getName());
         Article article = ArticleRepo.getOne(id);
         String tags = parseTags(TagRepo.findByArticle(article));
         model.put("tags", tags);
