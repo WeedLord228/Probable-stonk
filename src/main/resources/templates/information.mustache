@@ -26,9 +26,9 @@
     {{#articles}}
         <a href="article?id={{id}}" class="nav-link"> {{name }}</a>
     {{/articles}}
-    <li>Тест</li>
+    <li>Вы заходили на сайт {{visited}} раз</li>
     {{#info}}
-    <a>Информация о вас : {{content}}</a>
+        <a>Информация о вас : {{content}}</a>
     {{/info}}
     <form method="post" action="information">
         <textarea rows="10" cols="40" name="content" placeholder="Напишите о себе"></textarea>
