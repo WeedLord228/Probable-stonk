@@ -40,7 +40,6 @@ public class MainController {
     public String index(Map<String, Object> model) {
         model.put("username", SecurityContextHolder.getContext().getAuthentication().getName());
         User user = userRepo.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
-        System.out.println(user);
         user.setVisited(user.getVisited() + 1);
         userRepo.save(user);
         return "index";
