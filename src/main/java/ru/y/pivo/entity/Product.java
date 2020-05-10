@@ -1,5 +1,4 @@
 package ru.y.pivo.entity;
-
 import javax.persistence.*;
 
 @Entity
@@ -9,16 +8,18 @@ public class Product {
     private Integer id;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="store")
+    @JoinColumn(name = "store")
     private Store store;
 
     private String name;
+
+    private long requested;
 
     public Product() {
     }
 
     public Product(Store store_id, String name) {
-        this.store= store_id;
+        this.store = store_id;
         this.name = name;
     }
 
@@ -44,5 +45,13 @@ public class Product {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public long getRequested() {
+        return requested;
+    }
+
+    public void setRequested(long requested) {
+        this.requested = requested;
     }
 }
