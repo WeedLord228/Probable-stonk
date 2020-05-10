@@ -39,9 +39,6 @@ public class MainController {
     @GetMapping("/index")
     public String index(Map<String, Object> model) {
         model.put("username", SecurityContextHolder.getContext().getAuthentication().getName());
-        User user = userRepo.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
-        user.setVisited(user.getVisited() + 1);
-        userRepo.save(user);
         return "index";
     }
 
