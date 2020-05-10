@@ -15,6 +15,7 @@ public class User {
     private String username;
     private String password;
     private boolean active;
+    private long visited;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
@@ -59,5 +60,13 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public long getVisited() {
+        return visited;
+    }
+
+    public void setVisited(long visited) {
+        this.visited = visited;
     }
 }

@@ -5,48 +5,50 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import ru.y.pivo.entity.Article;
-import ru.y.pivo.entity.Info;
 import ru.y.pivo.entity.Role;
 import ru.y.pivo.entity.User;
 import ru.y.pivo.repos.ArticleRepo;
 import ru.y.pivo.repos.InfoRepo;
 import ru.y.pivo.repos.UserRepo;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Map;
 
 @Controller
 public class MainController {
     @Autowired
-    private ru.y.pivo.repos.InfoRepo InfoRepo;
+    private InfoRepo InfoRepo;
+
     @Autowired
-    private ru.y.pivo.repos.ArticleRepo ArticleRepo;
+    private ArticleRepo ArticleRepo;
+
     @Autowired
     private UserRepo userRepo;
 
     @GetMapping("/")
     public String main(Map<String, Object> model) {
-            return "home";
+        return "home";
     }
 
     @GetMapping("/login")
-    public String login(Map <String,Object> model){
+    public String login(Map<String, Object> model) {
         SecurityContextHolder.getContext().getAuthentication().setAuthenticated(false);
         return "login";
     }
 
     @GetMapping("/index")
     public String index(Map<String, Object> model) {
-        model.put("username",SecurityContextHolder.getContext().getAuthentication().getName());
+        model.put("username", SecurityContextHolder.getContext().getAuthentication().getName());
+        User user = userRepo.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        System.out.println(user);
+        user.setVisited(user.getVisited() + 1);
+        userRepo.save(user);
         return "index";
     }
 
     @GetMapping("/maps")
     public String maps(Map<String, Object> model) {
-        model.put("username",SecurityContextHolder.getContext().getAuthentication().getName());
+        model.put("username", SecurityContextHolder.getContext().getAuthentication().getName());
         return "maps";
     }
 
