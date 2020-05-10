@@ -42,14 +42,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         };
 
         http
-                .authorizeRequests()
-                .antMatchers("/", "/home", "/registration")
-                .permitAll()
-                .anyRequest()
-                .authenticated()
+                    .authorizeRequests()
+                    .antMatchers("/", "/home", "/registration")
+                    .permitAll()
+                    .anyRequest()
+                    .authenticated()
                 .and()
-                .formLogin()
-                .successHandler(authenticationSuccessHandler)
+                    .formLogin()
+                    .successHandler(authenticationSuccessHandler)
                     .loginPage("/login")
                     .permitAll()
                 .and()
