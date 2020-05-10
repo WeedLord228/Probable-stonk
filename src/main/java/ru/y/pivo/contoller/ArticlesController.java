@@ -91,7 +91,7 @@ public class ArticlesController {
                 (content.length() < 3 )  || (header.length() < 3))
         {
             model.put("response", "Отсутсвует одно из полей!");
-            return "articles";
+            return "addArticle";
         }
 
         if (article == null) {
