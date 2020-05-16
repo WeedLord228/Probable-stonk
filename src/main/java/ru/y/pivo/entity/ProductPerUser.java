@@ -19,6 +19,9 @@ public class ProductPerUser {
 
     private Integer searches = 0;
 
+
+    public ProductPerUser() {}
+
     public Integer getSearches() {
         return searches;
     }
