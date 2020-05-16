@@ -6,14 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import ru.y.pivo.entity.Article;
-import ru.y.pivo.entity.Info;
-import ru.y.pivo.entity.Pictures;
-import ru.y.pivo.entity.User;
-import ru.y.pivo.repos.ArticleRepo;
-import ru.y.pivo.repos.InfoRepo;
-import ru.y.pivo.repos.PictureRepo;
-import ru.y.pivo.repos.UserRepo;
+import ru.y.pivo.entity.*;
+import ru.y.pivo.repos.*;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -32,6 +26,9 @@ public class InfoController {
     @Autowired
     private UserRepo userRepo;
 
+    @Autowired
+    private ProductPerUserRepo productPerUserRepo;
+
     @GetMapping("/information")
     public String information(Map<String, Object> model) {
         ArrayList<Article> articles = (ArrayList<Article>) ArticleRepo.findAll();
@@ -48,6 +45,8 @@ public class InfoController {
 
         Pictures picture = PictureRepo.findByName(user.getUsername());
         Info info = InfoRepo.findByName(user.getUsername());
+        ProductPerUser мостСерчедПрадакт = productPerUserRepo.findTopByOrderBySearchesDesc();
+        model.put("мостСерчедПрадакт", мостСерчедПрадакт);
         model.put("picture", picture);
         model.put("info", info);
         model.put("username", SecurityContextHolder.getContext().getAuthentication().getName());

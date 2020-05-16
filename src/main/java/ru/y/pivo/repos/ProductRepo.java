@@ -8,8 +8,6 @@ import java.util.List;
 
 public interface ProductRepo extends JpaRepository<Product, Integer> {
     List<Product> findByName(String name);
-
     Product findByStoreAndName(Store id, String name);
-
     Product findTopByOrderByRequestedDesc();
 }
